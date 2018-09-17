@@ -7,3 +7,9 @@ $APP['database'] = [
 ];
 
 $APP['connections'] = [];
+
+
+$APP['admin_panel_access'] = [
+  'username' => 'admin',
+  'password' => '1234'
+];
