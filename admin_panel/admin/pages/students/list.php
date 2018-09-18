@@ -1,5 +1,16 @@
 <?php
-$queryString = "
+if(!empty($_GET['delete'])){
+    $queryString = "DELETE FROM students WHERE id = {$_GET['id']}";
+    if(mysqli_query($APP['connections']['default'], $queryString)) {
+        $message = 'Delete success';
+    }else{
+        $message = 'Delete error';
+    }
+}
+?>
+<?php
+
+$students = dbSelect("
     SELECT
         students.id,
         CONCAT(first_name, ' ', last_name) AS student_name,
@@ -7,27 +18,11 @@ $queryString = "
     FROM
         students
         JOIN groups ON groups.id = students.group_id
-";
-
-if(!empty($_POST['search']))
-    $queryString .= "
-    WHERE 
-      students.first_name LIKE '%{$_POST['search']}%'
-      OR 
-      students.last_name LIKE '%{$_POST['search']}%'
-    ";
-echo $queryString;
-$students = dbSelect($queryString);
+");
 ?>
 
 
 <strong><?=$message;?></strong>
-
-<form action="" method="post">
-    <input type="text" name="search">
-    <input type="submit" value="search">
-</form>
-
 
 <? if(count($students)){?>
 <table border="1">
@@ -35,6 +30,7 @@ $students = dbSelect($queryString);
         <tr>
             <th>Name</th>
             <th>Group</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -42,6 +38,10 @@ $students = dbSelect($queryString);
         <tr>
             <td><?=$student['student_name'];?></td>
             <td><?=$student['group_name'];?></td>
+            <td>
+                <a href="?module=students&action=list&delete=1&id=<?=$student['id'];?>" onclick="return confirm('Delete this record?')">X</a>
+                <a href="?module=students&action=update&id=<?=$student['id'];?>">U</a>
+            </td>
         </tr>
         <? }?>
     </tbody>
