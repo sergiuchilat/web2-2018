@@ -1,0 +1,9 @@
+1. Care este sintaxa de definire a unei clase? Exemplu
+2. Ce este un constructor? Exemplu
+3. Enumerați 5 avantaje ale POO
+4. Ce este moștenirea?
+5. Care este diferența dintre o clasă abstractă și o interfață?
+6. Ce este polimorfismul?
+7. Pentru ce sunt utilizați getterii?
+9. Explicați care este diferența dintre public, protected și private
+10. Ce este o claă finală?
